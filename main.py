@@ -5,13 +5,16 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
+
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
+
 
 @app.get("/index")
 def index():
@@ -29,3 +32,8 @@ def index():
     </html>
     """
     return HTMLResponse(content=html_content, status_code=200)
+
+
+@app.post("/teacher")
+async def teacher(student):
+    return {"message": f"{student}さん、今日もよく頑張りました！"}
